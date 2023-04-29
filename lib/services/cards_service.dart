@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:psau_rant_flutter/models/cardset_model.dart';
+import 'package:psau_rant_flutter/models/card_set_model.dart';
 
 class CardSService {
   final String? uid;
@@ -19,9 +19,9 @@ class CardSService {
         cardSetName: cardSetDoc['card_set_name'],
         cardSetAuthorId: cardSetDoc['card_set_author_id'],
         cardSetIsPublic: cardSetDoc['card_set_isPublic'],
-        cardSetCards: cardSetDoc['card_set_cards'].map<Card>(
+        cardSetCards: cardSetDoc['card_set_cards'].map<CardPiece>(
           (card) {
-            return Card(
+            return CardPiece(
               cardId: card['card_id'],
               cardTerm: card['card_term'],
               cardDefinition: card['card_definition'],

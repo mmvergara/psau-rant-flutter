@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:psau_rant_flutter/models/cardset_model.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
+import 'package:psau_rant_flutter/models/card_set_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
 import 'package:psau_rant_flutter/services/cards_service.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class EnterCardIDPage extends StatefulWidget {
   const EnterCardIDPage({super.key});
@@ -49,6 +49,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: PsauColors.primaryGreen,
         title: const Text("Enter Card ID"),
       ),
       body: Container(
@@ -98,6 +99,10 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                 width: 200,
                 child: ElevatedButton(
                   onPressed: _onSubmit,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        PsauColors.primaryGreen),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [

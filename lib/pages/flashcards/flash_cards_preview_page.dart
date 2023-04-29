@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:psau_rant_flutter/models/cardset_model.dart';
+import 'package:psau_rant_flutter/models/card_set_model.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class CardSetPreviewPage extends StatefulWidget {
@@ -12,6 +13,19 @@ class CardSetPreviewPage extends StatefulWidget {
 
 class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
   bool isShuffled = true;
+
+  void _playCard(bool termFirst) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PlayFlashCardPage(
+          cardSet: widget.cardSet,
+          isShuffled: isShuffled,
+          termFirst: termFirst,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +36,9 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
       ),
       body: Column(children: [
         Container(
-          margin: const EdgeInsets.only(top: 50, bottom: 20),
-          color: Colors.lightGreen[600],
+          margin: const EdgeInsets.only(top: 50, bottom: 10),
           child: Text(
-            "Card Set \n ${widget.cardSet.cardSetName} lorem lorem me mem ",
+            " ${widget.cardSet.cardSetName}",
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 15,
@@ -33,9 +46,70 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-        )
+        // toggle switch shuffle or not widget with background color
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Shuffled",
+                style: TextStyle(fontSize: 16),
+              ),
+              Switch(
+                value: isShuffled,
+                onChanged: (value) {
+                  setState(() {
+                    isShuffled = value;
+                  });
+                },
+                activeTrackColor: PsauColors.primaryGreen,
+                activeColor: Colors.green[800],
+              ),
+            ],
+          ),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              PsauColors.primaryGreen,
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(
+              const Size(200, 40),
+            ),
+          ),
+          onPressed: () {
+            _playCard(true);
+          },
+          child: const Text("Term First"),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              PsauColors.primaryGreen,
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(
+              const Size(200, 40),
+            ),
+          ),
+          onPressed: () {
+            _playCard(false);
+          },
+          child: const Text("Definition First"),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              PsauColors.primaryGreen,
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(
+              const Size(200, 40),
+            ),
+          ),
+          onPressed: () {},
+          child: const Text("Save Cards for Offline"),
+        ),
       ]),
     );
   }

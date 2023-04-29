@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
 import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
 import 'package:psau_rant_flutter/pages/saved_cards_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flashcard.dart';
 import 'package:psau_rant_flutter/pages/rants/rant.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,9 +1,9 @@
-class Card {
+class CardPiece {
   String cardId;
   String cardTerm;
   String cardDefinition;
 
-  Card(
+  CardPiece(
       {required this.cardId,
       required this.cardTerm,
       required this.cardDefinition});
@@ -14,7 +14,7 @@ class CardSet {
   String cardSetName;
   String cardSetAuthorId;
   bool cardSetIsPublic;
-  List<Card> cardSetCards;
+  List<CardPiece> cardSetCards;
 
   CardSet({
     required this.cardSetId,
