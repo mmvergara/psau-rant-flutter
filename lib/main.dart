@@ -4,10 +4,12 @@ import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.da
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_saved_page.dart';
 import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
+import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await SavedCardSetsPreferences.init();
   runApp(const MyApp());
 }
 

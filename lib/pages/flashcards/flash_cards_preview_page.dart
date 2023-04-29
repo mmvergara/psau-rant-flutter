@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
+import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
 class CardSetPreviewPage extends StatefulWidget {
   final CardSet cardSet;
@@ -24,6 +25,10 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
         ),
       ),
     );
+  }
+
+  void _savedCardToSP() async {
+    await SavedCardSetsPreferences.addCardSet(widget.cardSet);
   }
 
   @override
@@ -107,7 +112,7 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
               const Size(200, 40),
             ),
           ),
-          onPressed: () {},
+          onPressed: _savedCardToSP,
           child: const Text("Save Cards for Offline"),
         ),
       ]),
