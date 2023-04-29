@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_saved_page.dart';
 import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
-import 'package:psau_rant_flutter/pages/saved_cards_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 void main() async {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const FlashCardsDashboardPage(),
-    const SavedCards(),
+    const SavedCardsPage(),
   ];
   @override
   Widget build(BuildContext context) {
