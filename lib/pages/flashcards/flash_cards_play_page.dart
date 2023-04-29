@@ -12,7 +12,9 @@ class PlayFlashCardPage extends StatefulWidget {
 class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView.builder(
         itemCount: widget.flashCards.length,
         itemBuilder: (BuildContext context, int index) {
           final flashCard = widget.flashCards[index];
@@ -20,6 +22,8 @@ class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
             frontText: flashCard['front'].toString(),
             backText: flashCard['back'].toString(),
           );
-        });
+        },
+      ),
+    );
   }
 }

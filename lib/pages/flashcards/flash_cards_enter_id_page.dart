@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
 
 class EnterCardIDPage extends StatefulWidget {
   const EnterCardIDPage({super.key});
@@ -14,6 +13,30 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
   final _textEditingController = TextEditingController();
   String _cardID = "aaa";
   String status = "";
+
+  void _onSubmit() async {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PlayFlashCardPage(
+          flashCards: [
+            {
+              'front': 'Front of card $_cardID',
+              'back': 'Back of card $_cardID'
+            },
+            {
+              'front': 'Front of card $_cardID',
+              'back': 'Back of card $_cardID'
+            },
+            {
+              'front': 'Front of card $_cardID',
+              'back': 'Back of card $_cardID'
+            },
+            {'front': 'Front of card $_cardID', 'back': 'Back of card $_cardID'}
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +53,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                 controller: _textEditingController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Enter text',
+                    labelText: 'Enter Card ID',
                     constraints: BoxConstraints(maxWidth: 200)),
               ),
               SizedBox(
@@ -64,16 +87,19 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                       _cardID = _textEditingController.text;
                     });
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.send),
-                      SizedBox(width: 5),
-                      Text(
-                        'Submit Card ID',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  child: GestureDetector(
+                    onTap: _onSubmit,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.send),
+                        SizedBox(width: 5),
+                        Text(
+                          'Submit Card ID',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
