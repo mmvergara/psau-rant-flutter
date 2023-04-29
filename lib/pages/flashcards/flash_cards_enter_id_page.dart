@@ -13,6 +13,7 @@ class EnterCardIDPage extends StatefulWidget {
 class _EnterCardIDPageState extends State<EnterCardIDPage> {
   final _textEditingController = TextEditingController();
   String _cardID = "aaa";
+  String status = "";
 
   @override
   Widget build(BuildContext context) {
