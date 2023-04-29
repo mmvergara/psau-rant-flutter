@@ -58,9 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
           currentIndex: _selectedPage,
           onTap: (value) {
             setState(() {
-              if (!(!authenticated && value == 1)) {
-                _selectedPage = value;
-              }
+              // if (!(!authenticated && value == 1)) {
+              _selectedPage = value;
+              // }
             });
           },
           items: const <BottomNavigationBarItem>[
