@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
-import 'package:psau_rant_flutter/services/cards_service.dart';
+import 'package:psau_rant_flutter/screen/flashcards/card_set_preview_page.dart';
+import 'package:psau_rant_flutter/services/card_set_service.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class EnterCardIDPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class EnterCardIDPage extends StatefulWidget {
 class _EnterCardIDPageState extends State<EnterCardIDPage> {
   final _textEditingController = TextEditingController();
   String status = "";
-  final CardSService cservice = CardSService(uid: "");
+  final CardSetService cservice = CardSetService(uid: "");
 
   void _onSubmit() async {
     setState(() {
@@ -40,6 +40,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
       MaterialPageRoute(
         builder: (_) => CardSetPreviewPage(
           cardSet: cardSet,
+          showSaveOffline: true,
         ),
       ),
     );
@@ -53,8 +54,9 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
         title: const Text("Enter Card ID"),
       ),
       body: Container(
+          color: PsauColors.creamBg,
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 150),
+          padding: const EdgeInsets.only(top: 150),
           child: Column(
             children: [
               Container(
@@ -68,12 +70,13 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
               TextField(
                 controller: _textEditingController,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter Card ID',
-                    constraints: BoxConstraints(maxWidth: 200)),
+                  border: OutlineInputBorder(),
+                  labelText: 'Enter Card ID',
+                  constraints: BoxConstraints(maxWidth: 200),
+                ),
               ),
               SizedBox(
-                width: 200,
+                width: 180,
                 child: ElevatedButton(
                   onPressed: () async {
                     final clipboardData = await Clipboard.getData('text/plain');
@@ -84,7 +87,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Icon(Icons.content_paste_go),
+                      Icon(Icons.content_paste_go, size: 18),
                       SizedBox(width: 5),
                       Text(
                         'Paste from Clipboard',
@@ -96,7 +99,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20),
-                width: 200,
+                width: 180,
                 child: ElevatedButton(
                   onPressed: _onSubmit,
                   style: ButtonStyle(
@@ -106,8 +109,11 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Icon(Icons.send),
-                      SizedBox(width: 5),
+                      Icon(
+                        Icons.send,
+                        size: 15,
+                      ),
+                      SizedBox(width: 10),
                       Text(
                         'Submit Card ID',
                         style: TextStyle(fontSize: 16),

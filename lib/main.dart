@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_saved_page.dart';
-import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
+import 'package:psau_rant_flutter/screen/flashcards/saved_cardsets_page.dart';
+import 'package:psau_rant_flutter/screen/home/home_page.dart';
+import 'package:psau_rant_flutter/screen/mycards/mycards_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
@@ -43,9 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    const FlashCardsDashboardPage(),
-    const SavedCardsPage(),
+    const MyCardsPage(),
+    const SavedCardSetsPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,9 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
           currentIndex: _selectedPage,
           onTap: (value) {
             setState(() {
-              // if (!(!authenticated && value == 1)) {
               _selectedPage = value;
-              // }
             });
           },
           items: const <BottomNavigationBarItem>[

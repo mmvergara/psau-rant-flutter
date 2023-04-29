@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
+import 'package:psau_rant_flutter/screen/flashcards/play_flash_cards_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
 class CardSetPreviewPage extends StatefulWidget {
   final CardSet cardSet;
-  const CardSetPreviewPage({super.key, required this.cardSet});
+  final bool showSaveOffline;
+  const CardSetPreviewPage({
+    super.key,
+    required this.cardSet,
+    required this.showSaveOffline,
+  });
 
   @override
   State<CardSetPreviewPage> createState() => _CardSetPreviewPageState();
@@ -19,7 +24,7 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
   void _playCard(bool termFirst) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => PlayFlashCardPage(
+        builder: (_) => PlayFlashCardsPage(
           cardSet: widget.cardSet,
           isShuffled: isShuffled,
           termFirst: termFirst,
@@ -112,20 +117,22 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
             },
             child: const Text("Definition First"),
           ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                savingOfflineStatus == "Saved!"
-                    ? Colors.green[800]!
-                    : PsauColors.primaryGreen,
-              ),
-              minimumSize: MaterialStateProperty.all<Size>(
-                const Size(200, 40),
-              ),
-            ),
-            onPressed: _savedCardToSP,
-            child: Text(savingOfflineStatus),
-          ),
+          widget.showSaveOffline
+              ? ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      savingOfflineStatus == "Saved!"
+                          ? Colors.green[800]!
+                          : PsauColors.primaryGreen,
+                    ),
+                    minimumSize: MaterialStateProperty.all<Size>(
+                      const Size(200, 40),
+                    ),
+                  ),
+                  onPressed: _savedCardToSP,
+                  child: Text(savingOfflineStatus),
+                )
+              : Container(),
         ],
       ),
     );

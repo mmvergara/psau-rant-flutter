@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
+import 'package:psau_rant_flutter/screen/flashcards/card_set_preview_page.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
-class SavedCardsPage extends StatefulWidget {
-  const SavedCardsPage({super.key});
+class SavedCardSetsPage extends StatefulWidget {
+  const SavedCardSetsPage({super.key});
   @override
-  State<SavedCardsPage> createState() => _SavedCardsPageState();
+  State<SavedCardSetsPage> createState() => _SavedCardSetsPageState();
 }
 
-class _SavedCardsPageState extends State<SavedCardsPage> {
+class _SavedCardSetsPageState extends State<SavedCardSetsPage> {
   List<CardSet> cardSets = [];
 
   @override
@@ -32,6 +32,7 @@ class _SavedCardsPageState extends State<SavedCardsPage> {
       MaterialPageRoute(
         builder: (_) => CardSetPreviewPage(
           cardSet: cardSet,
+          showSaveOffline: false,
         ),
       ),
     );

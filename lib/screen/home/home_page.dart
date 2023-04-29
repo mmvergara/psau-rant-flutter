@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/rant_model.dart';
-import 'package:psau_rant_flutter/pages/rants/rant.dart';
+import 'package:psau_rant_flutter/screen/rants/rant.dart';
 import 'package:psau_rant_flutter/services/rant_service.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,12 +30,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-      itemCount: rants.length,
-      itemBuilder: (context, index) {
-        Rant rant = rants[index];
-        return RantPiece(rant: rant);
-      },
-    ));
+      body: Container(
+        color: PsauColors.creamBg,
+        child: ListView.builder(
+          itemCount: rants.length,
+          itemBuilder: (context, index) {
+            Rant rant = rants[index];
+            return RantPiece(rant: rant);
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text("Create Rant"),
+        icon: const Icon(Icons.campaign),
+        backgroundColor: PsauColors.primaryGreen,
+      ),
+    );
   }
 }

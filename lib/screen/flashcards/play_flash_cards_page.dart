@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flashcard.dart';
+import 'package:psau_rant_flutter/screen/flashcards/flashcard.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
-class PlayFlashCardPage extends StatefulWidget {
+class PlayFlashCardsPage extends StatefulWidget {
   final CardSet cardSet;
   final bool isShuffled;
   final bool termFirst;
-  const PlayFlashCardPage(
+  const PlayFlashCardsPage(
       {super.key,
       required this.cardSet,
       required this.isShuffled,
       required this.termFirst});
 
   @override
-  State<PlayFlashCardPage> createState() => _PlayFlashCardPageState();
+  State<PlayFlashCardsPage> createState() => _PlayFlashCardsPageState();
 }
 
-class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
+class _PlayFlashCardsPageState extends State<PlayFlashCardsPage> {
   List<CardPiece> _cards = [];
 
   @override

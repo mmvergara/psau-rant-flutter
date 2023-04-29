@@ -40,7 +40,7 @@ class RantPieceState extends State<RantPiece> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
-            color: Colors.grey[300],
+            color: PsauColors.sleekGreen,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -1,18 +1,17 @@
-# Sign in page
+# Todo
 
-# Login Page
+- Login Btn AppBar then Profile Dropdown icon
+- Login Page
+- Persistent Login
+- Change the UI of My Cards Page depend on auth state
+- Loading State of App when opened
+- rename flashcards to flashcard only on pages
 
-# Login Btn on App Bar
+# Todo Web
 
-if logged in
-
-- show profile icon
-- dropdown of settings and logout
-
-# add app download link to web
-
-# rename flashcards to flashcard only on pages
-
-# add copy card id in the web
-
-# loading state
+- remove flipcards btn
+- stil show credits if not auth
+- consider using mobile btns if platform == mobile on
+- sidebar
+- card preview
+- home page

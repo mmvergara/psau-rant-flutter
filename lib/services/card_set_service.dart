@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
 
-class CardSService {
+class CardSetService {
   final String? uid;
-  CardSService({required this.uid});
+  CardSetService({required this.uid});
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // collection reference
