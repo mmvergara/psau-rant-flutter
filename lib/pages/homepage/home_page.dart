@@ -14,21 +14,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        FlashCard(backText: "UUOOUO", frontText: "OOUOUO FRONT"),
-        FlashCard(backText: "UUOOUO", frontText: "OOUOUO FRONT"),
-        FlashCard(backText: "UUOOUO", frontText: "OOUOUO FRONT"),
-        FlashCard(backText: "UUOOUO", frontText: "OOUOUO FRONT"),
-        FlashCard(backText: "UUOOUO", frontText: "OOUOUO FRONT"),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
-        RantPiece(),
         RantPiece(),
         RantPiece(),
       ]),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class FlashCard extends StatefulWidget {
   final String frontText;
@@ -61,7 +62,7 @@ class _FlashCardState extends State<FlashCard>
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        color: Colors.green[greenShade],
+        color: PsauColors.primaryGreen,
       ),
       padding: const EdgeInsets.all(20),
       constraints: const BoxConstraints(minWidth: 200, minHeight: 200),

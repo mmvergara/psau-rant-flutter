@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:psau_rant_flutter/models/cardset_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
 import 'package:psau_rant_flutter/services/cards_service.dart';
 
 class EnterCardIDPage extends StatefulWidget {
@@ -24,7 +25,8 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
     CardSet? cardSet = await cservice.fetchCardSetById(cardID);
     if (cardSet == null) {
       setState(() {
-        status = "Card ID not found";
+        status = "Card ID not found \n or \n Something wen't wrong";
+        _textEditingController.text = "";
       });
       return;
     }
@@ -36,8 +38,8 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
     if (!mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => PlayFlashCardPage(
-          flashCards: cardSet,
+        builder: (_) => CardSetPreviewPage(
+          cardSet: cardSet,
         ),
       ),
     );
@@ -58,6 +60,7 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Text(
                   status,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 16),
                 ),
               ),

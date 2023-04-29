@@ -30,7 +30,7 @@ class RantPieceState extends State<RantPiece> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Authaossr",
+                    "Autha",
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ],

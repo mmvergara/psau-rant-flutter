@@ -3,8 +3,8 @@ import 'package:psau_rant_flutter/models/cardset_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flashcard.dart';
 
 class PlayFlashCardPage extends StatefulWidget {
-  final CardSet flashCards;
-  const PlayFlashCardPage({super.key, required this.flashCards});
+  final CardSet cardSet;
+  const PlayFlashCardPage({super.key, required this.cardSet});
 
   @override
   State<PlayFlashCardPage> createState() => _PlayFlashCardPageState();
@@ -16,9 +16,9 @@ class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
     return Scaffold(
       appBar: AppBar(),
       body: ListView.builder(
-        itemCount: widget.flashCards.cardSetCards.length,
+        itemCount: widget.cardSet.cardSetCards.length,
         itemBuilder: (BuildContext context, int index) {
-          final flashCard = widget.flashCards.cardSetCards[index];
+          final flashCard = widget.cardSet.cardSetCards[index];
           return FlashCard(
             frontText: flashCard.cardDefinition,
             backText: flashCard.cardTerm,

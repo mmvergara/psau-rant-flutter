@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_preview_page.dart';
 import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
 import 'package:psau_rant_flutter/pages/saved_cards_page.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,13 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("PSAU Rant"),
-          backgroundColor: Colors.green[900],
+          backgroundColor: PsauColors.primaryGreen,
         ),
         body: _pages[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
           elevation: 0,
           selectedFontSize: 12,
-          backgroundColor: Colors.green[900],
+          backgroundColor: PsauColors.primaryGreen,
           fixedColor: Colors.yellow[800],
           unselectedItemColor: Colors.white,
           showUnselectedLabels: true,
