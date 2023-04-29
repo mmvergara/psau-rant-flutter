@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "836236121842",
+    "project_id": "psau-rant",
+    "storage_bucket": "psau-rant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836236121842:android:184e1579305c50e49d226b",
+        "android_client_info": {
+          "package_name": "com.mmv.psau_rant_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836236121842-av8cnbkptporg28vbspiktk202dg63pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZXSN90rGYXqKdF1yDTPu46zCRC7ptZ58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836236121842-87ujg009j0pc865nqlei7lucdplribgh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "836236121842-k5s1flpfh4eee0p1mhuq9hq8rjop1uo3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.psauRant"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
