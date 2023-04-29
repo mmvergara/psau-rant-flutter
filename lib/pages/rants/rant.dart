@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:psau_rant_flutter/models/rant_model.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class RantPiece extends StatefulWidget {
-  const RantPiece({super.key});
+  final Rant rant;
+  const RantPiece({super.key, required this.rant});
 
   @override
   State<RantPiece> createState() => RantPieceState();
@@ -21,17 +24,16 @@ class RantPieceState extends State<RantPiece> {
           Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(3)),
-                color: Colors.green[800],
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(3)),
+                color: PsauColors.primaryGreen,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Autha",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  Text(
+                    "${widget.rant.rantTitle} er lerl elr lelr lerl erl elrl elr lelr le lrel rle lrel ",
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
               )),
@@ -44,30 +46,46 @@ class RantPieceState extends State<RantPiece> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(bottom: 2),
-                  child: const Text(
-                    "lorem sadas asd sad sa d",
-                    style: TextStyle(color: Colors.black, fontSize: 13),
+                  child: Text(
+                    widget.rant.rantContent,
+                    style: const TextStyle(color: Colors.black, fontSize: 15),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "12/12/2021",
+                      widget.rant.rantDate,
                       style: TextStyle(color: Colors.grey[600], fontSize: 12),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      color: Colors.red[800],
-                      padding: const EdgeInsets.all(0),
-                      constraints: const BoxConstraints(),
-                      iconSize: 20,
-                      icon: const Icon(
-                        Icons.delete_forever,
-                      ),
-                    )
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      width: 90,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.red[800]!,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.favorite, size: 20),
+                            const SizedBox(width: 5),
+                            Text(
+                              widget.rant.rantLikes.length.toStringAsFixed(0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

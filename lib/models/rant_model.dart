@@ -4,6 +4,7 @@ class Rant {
   final String rantId;
   final String rantTitle;
   final String rantContent;
+  final String rantDate;
   Map<String, String> rantLikes;
 
   Rant({
@@ -13,5 +14,6 @@ class Rant {
     required this.rantTitle,
     required this.rantContent,
     required this.rantLikes,
+    required this.rantDate,
   });
 }

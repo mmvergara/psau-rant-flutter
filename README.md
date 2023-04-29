@@ -1,12 +1,17 @@
-# Flash Card Preview Page
+# Sign in page
 
-- should contain CardSet as a prop
+# Login Page
 
-# rename flashcards to flashcard only on pages
+# Login Btn on App Bar
 
-# proper routing
+if logged in
+
+- show profile icon
+- dropdown of settings and logout
 
 # add app download link to web
+
+# rename flashcards to flashcard only on pages
 
 # add copy card id in the web
 

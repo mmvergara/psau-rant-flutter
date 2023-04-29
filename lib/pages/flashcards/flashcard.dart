@@ -61,7 +61,7 @@ class _FlashCardState extends State<FlashCard>
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3),
+        borderRadius: BorderRadius.circular(8),
         color: PsauColors.primaryGreen,
       ),
       padding: const EdgeInsets.all(20),

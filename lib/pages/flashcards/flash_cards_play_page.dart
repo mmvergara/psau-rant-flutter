@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flashcard.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class PlayFlashCardPage extends StatefulWidget {
   final CardSet cardSet;
@@ -31,21 +32,26 @@ class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: _cards.length,
-        itemBuilder: (BuildContext context, int index) {
-          final flashCard = _cards[index];
-          return FlashCard(
-            frontText: widget.termFirst
-                ? flashCard.cardTerm
-                : flashCard.cardDefinition,
-            backText: widget.termFirst
-                ? flashCard.cardDefinition
-                : flashCard.cardTerm,
-          );
-        },
-      ),
-    );
+        appBar: AppBar(
+          title: Text(widget.cardSet.cardSetName),
+          backgroundColor: PsauColors.primaryGreen,
+        ),
+        body: Container(
+          color: PsauColors.creamBg,
+          child: ListView.builder(
+            itemCount: _cards.length,
+            itemBuilder: (BuildContext context, int index) {
+              final flashCard = _cards[index];
+              return FlashCard(
+                frontText: widget.termFirst
+                    ? flashCard.cardTerm
+                    : flashCard.cardDefinition,
+                backText: widget.termFirst
+                    ? flashCard.cardDefinition
+                    : flashCard.cardTerm,
+              );
+            },
+          ),
+        ));
   }
 }
