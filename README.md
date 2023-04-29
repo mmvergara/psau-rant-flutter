@@ -9,3 +9,5 @@
 # add app download link to web
 
 # add copy card id in the web
+
+# loading state

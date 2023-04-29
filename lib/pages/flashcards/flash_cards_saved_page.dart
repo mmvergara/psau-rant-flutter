@@ -27,24 +27,48 @@ class _SavedCardsPageState extends State<SavedCardsPage> {
     });
   }
 
+  void _playCardSet(CardSet cardSet) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => CardSetPreviewPage(
+          cardSet: cardSet,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         itemBuilder: (context, index) {
           CardSet cardSet = cardSets[index];
           return ListTile(
-            title: Text(cardSet.cardSetName),
-            leading: const Icon(
-              Icons.style,
-              color: PsauColors.primaryGreen,
+            title: GestureDetector(
+              onTap: () => _playCardSet(cardSet),
+              child: Text(cardSet.cardSetName),
             ),
-            subtitle: Text(cardSet.cardSetId),
-            trailing: const Icon(Icons.delete, color: Colors.red),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return CardSetPreviewPage(cardSet: cardSet);
-              }));
-            },
+            leading: GestureDetector(
+                onTap: () => _playCardSet(cardSet),
+                child: const Icon(
+                  Icons.style,
+                  color: PsauColors.primaryGreen,
+                )),
+            subtitle: GestureDetector(
+              onTap: () => _playCardSet(cardSet),
+              child: Text(cardSet.cardSetId),
+            ),
+            trailing: GestureDetector(
+              onTap: () {
+                setState(() {
+                  cardSets.removeAt(index);
+                });
+                SavedCardSetsPreferences.removeCardSet(cardSet);
+              },
+              child: const Icon(
+                Icons.delete,
+                color: Color.fromARGB(255, 92, 33, 33),
+              ),
+            ),
             tileColor: PsauColors.creamBg,
           );
         },
