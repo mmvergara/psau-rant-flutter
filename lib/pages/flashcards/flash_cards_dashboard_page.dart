@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psau_rant_flutter/pages/flashcards/flash_cards_enter_id_page.dart';
 
 class FlashCardsDashboardPage extends StatefulWidget {
   const FlashCardsDashboardPage({super.key});
@@ -16,7 +17,11 @@ class _FlashCardsDashboardPageState extends State<FlashCardsDashboardPage> {
         icon: const Icon(Icons.style_outlined),
         label: const Text("Play Card by ID"),
         backgroundColor: Colors.amber[700],
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const EnterCardIDPage()),
+          );
+        },
       ),
       body: Column(
         children: const [
