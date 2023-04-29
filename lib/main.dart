@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
-import 'package:psau_rant_flutter/pages/flashcards/saved_cards_page.dart';
 import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
+import 'package:psau_rant_flutter/pages/saved_cards_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -38,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const FlashCardsDashboardPage(),
-    const SavedCardsPage(),
+    const SavedCards(),
   ];
   @override
   Widget build(BuildContext context) {

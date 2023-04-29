@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:psau_rant_flutter/models/cardset_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flash_cards_play_page.dart';
+import 'package:psau_rant_flutter/services/cards_service.dart';
 
 class EnterCardIDPage extends StatefulWidget {
   const EnterCardIDPage({super.key});
@@ -11,28 +13,31 @@ class EnterCardIDPage extends StatefulWidget {
 
 class _EnterCardIDPageState extends State<EnterCardIDPage> {
   final _textEditingController = TextEditingController();
-  String _cardID = "aaa";
   String status = "";
+  final CardSService cservice = CardSService(uid: "");
 
   void _onSubmit() async {
+    setState(() {
+      status = "Loading...";
+    });
+    String cardID = _textEditingController.text;
+    CardSet? cardSet = await cservice.fetchCardSetById(cardID);
+    if (cardSet == null) {
+      setState(() {
+        status = "Card ID not found";
+      });
+      return;
+    }
+    setState(() {
+      status = "";
+      _textEditingController.text = "";
+    });
+
+    if (!mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PlayFlashCardPage(
-          flashCards: [
-            {
-              'front': 'Front of card $_cardID',
-              'back': 'Back of card $_cardID'
-            },
-            {
-              'front': 'Front of card $_cardID',
-              'back': 'Back of card $_cardID'
-            },
-            {
-              'front': 'Front of card $_cardID',
-              'back': 'Back of card $_cardID'
-            },
-            {'front': 'Front of card $_cardID', 'back': 'Back of card $_cardID'}
-          ],
+          flashCards: cardSet,
         ),
       ),
     );
@@ -46,9 +51,16 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
       ),
       body: Container(
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 200),
+          margin: const EdgeInsets.only(top: 150),
           child: Column(
             children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  status,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
               TextField(
                 controller: _textEditingController,
                 decoration: const InputDecoration(
@@ -82,28 +94,20 @@ class _EnterCardIDPageState extends State<EnterCardIDPage> {
                 margin: const EdgeInsets.only(top: 20),
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _cardID = _textEditingController.text;
-                    });
-                  },
-                  child: GestureDetector(
-                    onTap: _onSubmit,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.send),
-                        SizedBox(width: 5),
-                        Text(
-                          'Submit Card ID',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
+                  onPressed: _onSubmit,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.send),
+                      SizedBox(width: 5),
+                      Text(
+                        'Submit Card ID',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Text(_cardID)
             ],
           )),
     );

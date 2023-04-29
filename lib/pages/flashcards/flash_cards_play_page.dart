@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:psau_rant_flutter/models/cardset_model.dart';
 import 'package:psau_rant_flutter/pages/flashcards/flashcard.dart';
 
 class PlayFlashCardPage extends StatefulWidget {
-  final List<Map<String, String>> flashCards;
+  final CardSet flashCards;
   const PlayFlashCardPage({super.key, required this.flashCards});
 
   @override
@@ -15,12 +16,12 @@ class _PlayFlashCardPageState extends State<PlayFlashCardPage> {
     return Scaffold(
       appBar: AppBar(),
       body: ListView.builder(
-        itemCount: widget.flashCards.length,
+        itemCount: widget.flashCards.cardSetCards.length,
         itemBuilder: (BuildContext context, int index) {
-          final flashCard = widget.flashCards[index];
+          final flashCard = widget.flashCards.cardSetCards[index];
           return FlashCard(
-            frontText: flashCard['front'].toString(),
-            backText: flashCard['back'].toString(),
+            frontText: flashCard.cardDefinition,
+            backText: flashCard.cardTerm,
           );
         },
       ),
