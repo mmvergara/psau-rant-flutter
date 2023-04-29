@@ -53,6 +53,22 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text("PSAU Rant"),
           backgroundColor: PsauColors.primaryGreen,
+          actions: [
+            TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.login),
+              label: const Text("Sign In"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: PsauColors.primaryGreen,
+                foregroundColor: PsauColors.creamBg,
+                maximumSize: const Size(100, 100),
+                padding: const EdgeInsets.only(right: 15),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                ),
+              ),
+            )
+          ],
         ),
         body: _pages[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(

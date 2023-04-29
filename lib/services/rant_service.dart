@@ -32,7 +32,6 @@ class RantService {
       ).toList();
       return rants;
     } catch (e) {
-      print(e.toString());
       return [];
     }
   }
@@ -51,7 +50,6 @@ class RantService {
       await rantRef.update({'rant_likes': rantLikes});
       return true;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -70,7 +68,6 @@ class RantService {
       });
       return true;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
