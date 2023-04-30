@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:psau_rant_flutter/screen/auth/signin_page.dart';
 import 'package:psau_rant_flutter/screen/flashcards/enter_cardset_id_page.dart';
 import 'package:psau_rant_flutter/screen/mycards/dashboard.dart';
@@ -15,6 +17,8 @@ class MyCardsPage extends StatefulWidget {
 class _MyCardsPageState extends State<MyCardsPage> {
   @override
   Widget build(BuildContext context) {
+    User? user = Provider.of<User?>(context);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.style_outlined),
@@ -27,40 +31,28 @@ class _MyCardsPageState extends State<MyCardsPage> {
         },
       ),
       body: Container(
-        color: PsauColors.creamBg,
-        child: StreamBuilder(
-          stream: AuthService().userStream,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return const Center(child: Text("Something wen't wrong"));
-            }
-            if (snapshot.hasData) {
-              return const MyCardsDashboard();
-            }
-            return SizedBox(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  const Text("Please Sign In to view your cards"),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const SignInPage()),
-                      );
-                    },
-                    child: const Text("Sign In"),
+          color: PsauColors.creamBg,
+          child: user != null
+              ? const MyCardsDashboard()
+              : SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      const Text("Please Sign In to view your cards"),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => const SignInPage()),
+                          );
+                        },
+                        child: const Text("Sign In"),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
+                )),
     );
   }
 }

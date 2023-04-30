@@ -49,20 +49,20 @@ class _FlashCardState extends State<FlashCard>
             transform: Matrix4.rotationY(rotationValue * 0.0174533),
             alignment: Alignment.center,
             child: _isFrontVisible
-                ? _buildCard(widget.frontText, 800)
-                : _buildCard(widget.backText, 900),
+                ? _buildCard(widget.frontText, PsauColors.primaryGreen)
+                : _buildCard(widget.backText, Color.fromARGB(255, 16, 50, 24)),
           );
         },
       ),
     );
   }
 
-  Widget _buildCard(String text, int greenShade) {
+  Widget _buildCard(String text, Color greenShade) {
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: PsauColors.primaryGreen,
+        color: greenShade,
       ),
       padding: const EdgeInsets.all(20),
       constraints: const BoxConstraints(minWidth: 200, minHeight: 200),

@@ -13,7 +13,8 @@ class RantPiece extends StatefulWidget {
 class RantPieceState extends State<RantPiece> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
+      elevation: 3,
       margin: const EdgeInsets.symmetric(
         vertical: 12,
         horizontal: 10,
@@ -40,7 +41,10 @@ class RantPieceState extends State<RantPiece> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
-            color: PsauColors.sleekGreen,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(3)),
+              color: PsauColors.sleekGreen,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
