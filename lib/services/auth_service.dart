@@ -5,6 +5,19 @@ class AuthService {
   final userStream = FirebaseAuth.instance.authStateChanges();
   final user = FirebaseAuth.instance.currentUser;
 
+  Future<User?> firebaseSignInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      UserCredential user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      return user.user;
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<User?> firebaseGoogleLogin() async {
     try {
       // Trigger the authentication flow

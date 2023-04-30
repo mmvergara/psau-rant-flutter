@@ -59,16 +59,27 @@ class _MyCardsDashboardState extends State<MyCardsDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: PsauColors.creamBg,
-      child: ListView.builder(
-        itemCount: _cardSets.length,
-        itemBuilder: (context, index) {
-          CardSet cardSet = _cardSets[index];
-          return cardSetCard(_playCardSet, _deleteCardSet, cardSet, index);
-        },
-      ),
-    );
+    return !_isLoading && _cardSets.isEmpty
+        ? const Center(
+            child: Text(
+              'No card sets found',
+              style: TextStyle(
+                color: PsauColors.primaryGreen,
+                fontSize: 20,
+              ),
+            ),
+          )
+        : Container(
+            width: double.infinity,
+            color: PsauColors.creamBg,
+            child: ListView.builder(
+              itemCount: _cardSets.length,
+              itemBuilder: (context, index) {
+                CardSet cardSet = _cardSets[index];
+                return cardSetCard(
+                    _playCardSet, _deleteCardSet, cardSet, index);
+              },
+            ),
+          );
   }
 }

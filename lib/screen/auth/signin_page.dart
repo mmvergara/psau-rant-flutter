@@ -15,8 +15,19 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  _signInWithGoogle() async {
+  final _emailInputController = TextEditingController();
+  final _passwordInputController = TextEditingController();
+
+  Future<void> _signInWithGoogle() async {
     await AuthService().firebaseGoogleLogin();
+    if (!mounted) return;
+    Navigator.pop(context);
+  }
+
+  Future<void> _signInWithEmailAndPassword() async {
+    String email = _emailInputController.text;
+    String password = _passwordInputController.text;
+    await AuthService().firebaseSignInWithEmailAndPassword(email, password);
     if (!mounted) return;
     Navigator.pop(context);
   }
@@ -43,14 +54,16 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const Divider(),
             const SizedBox(height: 16.0),
-            TextFormField(
+            TextField(
+              controller: _emailInputController,
               decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16.0),
-            TextFormField(
+            TextField(
+              controller: _passwordInputController,
               decoration: const InputDecoration(
                 labelText: 'Password',
                 fillColor: Colors.white,
@@ -60,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: _signInWithEmailAndPassword,
               style: ElevatedButton.styleFrom(
                 backgroundColor: PsauColors.primaryGreen,
                 fixedSize: const Size(200, 30),
