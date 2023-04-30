@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
+import 'package:psau_rant_flutter/screen/flashcards/card_set_preview_page.dart';
 import 'package:psau_rant_flutter/services/card_set_service.dart';
+import 'package:psau_rant_flutter/shared/cardset_card.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class MyCardsDashboard extends StatefulWidget {
@@ -34,16 +36,38 @@ class _MyCardsDashboardState extends State<MyCardsDashboard> {
     });
   }
 
+  void _playCardSet(CardSet cardSet) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => CardSetPreviewPage(
+          cardSet: cardSet,
+          showSaveOffline: true,
+        ),
+      ),
+    );
+  }
+
+  void _deleteCardSet(int index, CardSet cardSet) async {
+    bool result = await CardSetService(uid: widget.uid)
+        .deleteCardSetById(cardSet.cardSetId);
+    if (result == true) {
+      setState(() {
+        _cardSets.removeAt(index);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       color: PsauColors.creamBg,
-      child: Column(
-        children: [
-          const Text("Flash Cards Dashboard"),
-          Text(_cardSets.length.toString())
-        ],
+      child: ListView.builder(
+        itemCount: _cardSets.length,
+        itemBuilder: (context, index) {
+          CardSet cardSet = _cardSets[index];
+          return cardSetCard(_playCardSet, _deleteCardSet, cardSet, index);
+        },
       ),
     );
   }

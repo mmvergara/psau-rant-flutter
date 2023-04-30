@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -61,13 +63,20 @@ class _SignInPageState extends State<SignInPage> {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: PsauColors.primaryGreen,
-                fixedSize: const Size(215, 30),
+                fixedSize: const Size(200, 30),
               ),
               child: const Text('Sign In'),
             ),
-            SignInButton(Buttons.GoogleDark, onPressed: _signInWithGoogle),
-            const SizedBox(height: 15),
             const Divider(),
+            SizedBox(
+              height: 40,
+              width: 170,
+              child: SignInButton(
+                Buttons.GoogleDark,
+                onPressed: _signInWithGoogle,
+                elevation: 2,
+              ),
+            ),
             TextButton(
               onPressed: () async {
                 Uri url = Uri.parse("https://psaurant.vercel.app/auth/signup");

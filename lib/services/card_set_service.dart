@@ -64,4 +64,14 @@ class CardSetService {
       return null;
     }
   }
+
+  // delete card set by id
+  Future<bool> deleteCardSetById(String cardSetId) async {
+    try {
+      await cardSetCollection.doc(cardSetId).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

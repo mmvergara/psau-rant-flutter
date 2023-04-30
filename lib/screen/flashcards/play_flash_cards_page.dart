@@ -7,11 +7,12 @@ class PlayFlashCardsPage extends StatefulWidget {
   final CardSet cardSet;
   final bool isShuffled;
   final bool termFirst;
-  const PlayFlashCardsPage(
-      {super.key,
-      required this.cardSet,
-      required this.isShuffled,
-      required this.termFirst});
+  const PlayFlashCardsPage({
+    super.key,
+    required this.cardSet,
+    required this.isShuffled,
+    required this.termFirst,
+  });
 
   @override
   State<PlayFlashCardsPage> createState() => _PlayFlashCardsPageState();

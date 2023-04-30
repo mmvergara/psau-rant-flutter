@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       backgroundColor: PsauColors.primaryGreen,
                       foregroundColor: PsauColors.creamBg,
                       maximumSize: const Size(100, 100),
-                      padding: const EdgeInsets.only(right: 15),
+                      padding: const EdgeInsets.only(right: 15, left: 10),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                       ),

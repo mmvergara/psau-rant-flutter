@@ -38,8 +38,16 @@ class _MyCardsPageState extends State<MyCardsPage> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const SizedBox(height: 20),
-                    const Text("Please Sign In to view your cards"),
+                    const SizedBox(height: 40),
+                    const Text(
+                      "Please sign in to view your cards. ",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: PsauColors.primaryGreen,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
@@ -47,7 +55,11 @@ class _MyCardsPageState extends State<MyCardsPage> {
                           MaterialPageRoute(builder: (_) => const SignInPage()),
                         );
                       },
-                      child: const Text("Sign In"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: PsauColors.primaryGreen,
+                        fixedSize: const Size(215, 30),
+                      ),
+                      child: const Text("Sign In 👑"),
                     ),
                   ],
                 ),
