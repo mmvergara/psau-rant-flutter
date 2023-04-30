@@ -34,4 +34,34 @@ class CardSetService {
       return null;
     }
   }
+
+  Future<List<CardSet>?> fetchUserCardSetsByUserId() async {
+    try {
+      QuerySnapshot cardSetDocs = await cardSetCollection
+          .where('card_set_author_id', isEqualTo: uid)
+          .get();
+      List<CardSet> cardSets = cardSetDocs.docs.map<CardSet>(
+        (cardSet) {
+          return CardSet(
+            cardSetId: cardSet.id,
+            cardSetName: cardSet['card_set_name'],
+            cardSetAuthorId: cardSet['card_set_author_id'],
+            cardSetIsPublic: cardSet['card_set_isPublic'],
+            cardSetCards: cardSet['card_set_cards'].map<CardPiece>(
+              (card) {
+                return CardPiece(
+                  cardId: card['card_id'],
+                  cardTerm: card['card_term'],
+                  cardDefinition: card['card_definition'],
+                );
+              },
+            ).toList(),
+          );
+        },
+      ).toList();
+      return cardSets;
+    } catch (e) {
+      return null;
+    }
+  }
 }

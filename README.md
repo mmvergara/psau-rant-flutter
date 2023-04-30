@@ -1,11 +1,10 @@
 # Todo
 
-- Login Btn AppBar then Profile Dropdown icon
-- Login Page
-- Persistent Login
-- Change the UI of My Cards Page depend on auth state
+- display Cards by User in the CardDashboard
+- add Copy Card ID in the Card Preview page
+- drawer with logout and current user email
+- settings link
 - Loading State of App when opened
-- rename flashcards to flashcard only on pages
 
 # Todo Web
 

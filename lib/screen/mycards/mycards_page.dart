@@ -31,28 +31,28 @@ class _MyCardsPageState extends State<MyCardsPage> {
         },
       ),
       body: Container(
-          color: PsauColors.creamBg,
-          child: user != null
-              ? const MyCardsDashboard()
-              : SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      const Text("Please Sign In to view your cards"),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) => const SignInPage()),
-                          );
-                        },
-                        child: const Text("Sign In"),
-                      ),
-                    ],
-                  ),
-                )),
+        color: PsauColors.creamBg,
+        child: user != null
+            ? MyCardsDashboard(uid: user.uid)
+            : SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    const Text("Please Sign In to view your cards"),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const SignInPage()),
+                        );
+                      },
+                      child: const Text("Sign In"),
+                    ),
+                  ],
+                ),
+              ),
+      ),
     );
   }
 }
