@@ -1,6 +1,5 @@
 # Todo
 
-- display Cards by User in the CardDashboard
 - add Copy Card ID in the Card Preview page
 - drawer with logout and current user email
 - settings link
