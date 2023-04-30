@@ -5,6 +5,7 @@ import 'package:psau_rant_flutter/screen/auth/signin_page.dart';
 import 'package:psau_rant_flutter/screen/flashcards/enter_cardset_id_page.dart';
 import 'package:psau_rant_flutter/screen/mycards/dashboard.dart';
 import 'package:psau_rant_flutter/services/auth_service.dart';
+import 'package:psau_rant_flutter/shared/please_sign_in.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class MyCardsPage extends StatefulWidget {
@@ -31,40 +32,10 @@ class _MyCardsPageState extends State<MyCardsPage> {
         },
       ),
       body: Container(
-        color: PsauColors.creamBg,
-        child: user != null
-            ? MyCardsDashboard(uid: user.uid)
-            : SizedBox(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 40),
-                    const Text(
-                      "Please sign in to view your cards. ",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: PsauColors.primaryGreen,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const SignInPage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: PsauColors.primaryGreen,
-                        fixedSize: const Size(215, 30),
-                      ),
-                      child: const Text("Sign In 👑"),
-                    ),
-                  ],
-                ),
-              ),
-      ),
+          color: PsauColors.creamBg,
+          child: user != null
+              ? MyCardsDashboard(uid: user.uid)
+              : pleaseSignInUI(context, "Please sign in to view your cards.")),
     );
   }
 }

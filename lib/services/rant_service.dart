@@ -71,4 +71,24 @@ class RantService {
       return null;
     }
   }
+
+  static Future<bool> handleLikeRant(
+      String rantId, bool isLiked, String userId) async {
+    try {
+      final rantRef =
+          FirebaseFirestore.instance.collection('rants').doc(rantId);
+      final String rantLikeRef = 'rant_likes.$userId';
+      if (!isLiked) {
+        // Add Like
+        await rantRef.update({rantLikeRef: userId});
+      } else {
+        // Delete Like
+        await rantRef.update({rantLikeRef: FieldValue.delete()});
+      }
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

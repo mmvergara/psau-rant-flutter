@@ -1,6 +1,6 @@
 # Todo
 
-- add Copy Card ID in the Card Preview page
+- add author name on rant 
 - drawer with logout and current user email
 - settings link
 - Loading State of App when opened

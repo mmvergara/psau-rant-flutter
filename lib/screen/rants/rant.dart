@@ -1,18 +1,52 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:psau_rant_flutter/models/rant_model.dart';
+import 'package:psau_rant_flutter/services/rant_service.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 
 class RantPiece extends StatefulWidget {
   final Rant rant;
-  const RantPiece({super.key, required this.rant});
+  final String? uid;
+  const RantPiece({super.key, required this.rant, this.uid});
 
   @override
   State<RantPiece> createState() => RantPieceState();
 }
 
 class RantPieceState extends State<RantPiece> {
+  bool isLiked = false;
+  int likesLength = 0;
+
+  Future<void> handleLikeClick() async {
+    if (widget.uid == null) return;
+    bool res = await RantService.handleLikeRant(
+        widget.rant.rantId, isLiked, widget.uid!);
+    if (!res) return;
+    if (isLiked) {
+      setState(() {
+        isLiked = false;
+        likesLength--;
+      });
+    } else {
+      setState(() {
+        isLiked = true;
+        likesLength++;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    likesLength = widget.rant.rantLikes.length;
+    isLiked = widget.rant.rantLikes.containsValue(widget.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<User?>(context);
+
     return Card(
       elevation: 3,
       margin: const EdgeInsets.symmetric(
@@ -33,7 +67,7 @@ class RantPieceState extends State<RantPiece> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${widget.rant.rantTitle} er lerl elr lelr lerl erl elrl elr lelr le lrel rle lrel ",
+                    "${widget.rant.rantTitle}",
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
@@ -70,7 +104,7 @@ class RantPieceState extends State<RantPiece> {
                     SizedBox(
                       width: 90,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: handleLikeClick,
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.red[800]!,
@@ -79,11 +113,13 @@ class RantPieceState extends State<RantPiece> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.favorite, size: 20),
+                            Icon(
+                                isLiked
+                                    ? Icons.favorite
+                                    : Icons.favorite_outline,
+                                size: 20),
                             const SizedBox(width: 5),
-                            Text(
-                              widget.rant.rantLikes.length.toStringAsFixed(0),
-                            ),
+                            Text(likesLength.toString()),
                           ],
                         ),
                       ),
