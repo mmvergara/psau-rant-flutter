@@ -67,7 +67,7 @@ class RantPieceState extends State<RantPiece> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${widget.rant.rantTitle}",
+                    widget.rant.rantTitle,
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],

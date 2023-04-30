@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psau_rant_flutter/models/rant_model.dart';
-import 'package:psau_rant_flutter/screen/rants/rant.dart';
+import 'package:psau_rant_flutter/screen/home/rant.dart';
 import 'package:psau_rant_flutter/services/rant_service.dart';
 import 'package:psau_rant_flutter/shared/please_sign_in.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   Rant rant = rants[index];
                   return RantPiece(
                     rant: rant,
-                    uid: user?.uid,
+                    uid: user.uid,
                   );
                 },
               ),
