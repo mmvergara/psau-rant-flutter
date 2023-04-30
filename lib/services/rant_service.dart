@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:psau_rant_flutter/models/rant_model.dart';
+import 'package:psau_rant_flutter/services/auth_service.dart';
 import 'package:psau_rant_flutter/util/helpers.dart';
 
 class RantService {
@@ -8,12 +9,12 @@ class RantService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // collection reference
-  static final CollectionReference cardSetCollection =
+  static final CollectionReference rantCollection =
       FirebaseFirestore.instance.collection('rants');
 
   static Future<List<Rant>> getMostRecentRants(int limit) async {
     try {
-      QuerySnapshot rantsSnapshot = await cardSetCollection
+      QuerySnapshot rantsSnapshot = await rantCollection
           .orderBy('rant_date', descending: true)
           .limit(limit)
           .get();
@@ -38,7 +39,7 @@ class RantService {
 
   static Future<bool?> likeRant(String rantId, String userId) async {
     try {
-      DocumentReference rantRef = cardSetCollection.doc(rantId);
+      DocumentReference rantRef = rantCollection.doc(rantId);
       DocumentSnapshot rantSnapshot = await rantRef.get();
       Map<String, String> rantLikes =
           rantSnapshot['rant_likes'].cast<String, String>();
@@ -48,24 +49,6 @@ class RantService {
         rantLikes[userId] = userId;
       }
       await rantRef.update({'rant_likes': rantLikes});
-      return true;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  static Future<bool?> addRant(
-      String rantTitle, String rantContent, String userId) async {
-    try {
-      DocumentReference rantRef = cardSetCollection.doc();
-      await rantRef.set({
-        'rant_title': rantTitle,
-        'rant_content': rantContent,
-        'rant_author_id': userId,
-        'rant_author_username': 'username',
-        'rant_likes': {},
-        'rant_date': Timestamp.now(),
-      });
       return true;
     } catch (e) {
       return null;
@@ -86,6 +69,25 @@ class RantService {
         await rantRef.update({rantLikeRef: FieldValue.delete()});
       }
 
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> createRant(
+      String rantTitle, String rantContent, String uid) async {
+    String? username = await AuthService().fetchUsernameByUid(uid);
+    try {
+      DocumentReference rantRef = rantCollection.doc();
+      await rantRef.set({
+        'rant_title': rantTitle,
+        'rant_content': rantContent,
+        'rant_author_id': uid,
+        'rant_author_username': username,
+        'rant_likes': {uid: uid},
+        'rant_date': Timestamp.now(),
+      });
       return true;
     } catch (e) {
       return false;

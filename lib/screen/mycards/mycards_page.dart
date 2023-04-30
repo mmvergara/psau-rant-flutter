@@ -32,10 +32,11 @@ class _MyCardsPageState extends State<MyCardsPage> {
         },
       ),
       body: Container(
-          color: PsauColors.creamBg,
-          child: user != null
-              ? MyCardsDashboard(uid: user.uid)
-              : pleaseSignInUI(context, "Please sign in to view your cards.")),
+        color: PsauColors.creamBg,
+        child: user != null
+            ? MyCardsDashboard(uid: user.uid)
+            : pleaseSignInUI(context, "Please sign in to view your cards.")
+      ),
     );
   }
 }
