@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:psau_rant_flutter/services/auth_service.dart';
 import 'package:psau_rant_flutter/services/rant_service.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CreateRantPage extends StatefulWidget {
   const CreateRantPage({super.key});
@@ -14,11 +17,15 @@ class CreateRantPage extends StatefulWidget {
 class _CreateRantPageState extends State<CreateRantPage> {
   final _titleInputController = TextEditingController();
   final _contentInputController = TextEditingController();
-  String _status = "ssssssssssssssss";
+
+  String _status = "";
   bool _loading = false;
+
   Future<void> _submitRant(String? uid) async {
     if (_loading) return;
-    if (uid == null) throw Error();
+    if (uid == null) return;
+
+    // Validate fields
     String title = _titleInputController.text;
     String content = _contentInputController.text;
     if (title.isEmpty ||
@@ -33,15 +40,31 @@ class _CreateRantPageState extends State<CreateRantPage> {
           });
       return;
     }
+
+    // Begin Loading State
     setState(() {
       _status = "Creating rant...";
       _loading = true;
     });
-    bool res = await RantService.createRant(title, content, uid);
+
+    // Fetch Username from uid
+    String? username = await AuthService().fetchUsernameByUid(uid);
+    if (username == null) {
+      setState(() => {
+            _status = "Error | Username not set",
+            _loading = false,
+          });
+      return;
+    }
+
+    // Create Rant
+    bool res = await RantService.createRant(title, content, uid, username);
     setState(() => {
           _status = res ? "Rant created!" : "Error creating rant",
           _loading = false,
         });
+
+    // Pop Page if successful
     if (!res) return;
     if (!mounted) return;
     Navigator.pop(context);
@@ -98,6 +121,28 @@ class _CreateRantPageState extends State<CreateRantPage> {
               icon: const Icon(Icons.campaign),
             ),
             Text(_status),
+            Visibility(
+              visible: _status == 'Error | Username not set',
+              child: RichText(
+                  text: TextSpan(children: [
+                const TextSpan(
+                  text:
+                      "Please set one by signing in the Web version of PSAU Rant ",
+                  style: TextStyle(color: Colors.black, fontSize: 12),
+                ),
+                TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Uri url =
+                          Uri.parse("https://psaurant.vercel.app/auth/signin");
+                      launchUrl(url);
+                    },
+                  text: "psaurant.vercel.app",
+                  style: const TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                )
+              ])),
+            )
           ],
         ),
       ),

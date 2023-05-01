@@ -76,8 +76,7 @@ class RantService {
   }
 
   static Future<bool> createRant(
-      String rantTitle, String rantContent, String uid) async {
-    String? username = await AuthService().fetchUsernameByUid(uid);
+      String rantTitle, String rantContent, String uid, String username) async {
     try {
       DocumentReference rantRef = rantCollection.doc();
       await rantRef.set({

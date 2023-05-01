@@ -1,6 +1,7 @@
 # Todo
 
-- add author name on rant 
+- dont allow the user to create a rant if there is no username set
+- add author name on rant
 - drawer with logout and current user email
 - settings link
 - Loading State of App when opened
