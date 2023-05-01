@@ -1,9 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:psau_rant_flutter/pages/flashcards/flash_cards_dashboard_page.dart';
-import 'package:psau_rant_flutter/pages/flashcards/saved_cards_page.dart';
-import 'package:psau_rant_flutter/pages/homepage/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:psau_rant_flutter/screen/auth/signin_page.dart';
+import 'package:psau_rant_flutter/screen/flashcards/saved_cardsets_page.dart';
+import 'package:psau_rant_flutter/screen/home/home_page.dart';
+import 'package:psau_rant_flutter/screen/mycards/mycards_page.dart';
+import 'package:psau_rant_flutter/services/auth_service.dart';
+import 'package:psau_rant_flutter/theme/psau_colors.dart';
+import 'package:psau_rant_flutter/util/sp_saved_card_sets.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await SavedCardSetsPreferences.init();
   runApp(const MyApp());
 }
 
@@ -13,12 +23,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return StreamProvider(
+      create: (_) => AuthService().userStream,
+      initialData: null,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -37,30 +51,67 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
-    const FlashCardsDashboardPage(),
-    const SavedCardsPage(),
+    const MyCardsPage(),
+    const SavedCardSetsPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
+    User? user = Provider.of<User?>(context);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("PSAU Rant"),
-          backgroundColor: Colors.green[900],
+          backgroundColor: PsauColors.primaryGreen,
+          actions: [
+            user == null
+                ? TextButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const SignInPage()),
+                      );
+                    },
+                    icon: const Icon(Icons.login),
+                    label: const Text("Sign In"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: PsauColors.primaryGreen,
+                      foregroundColor: PsauColors.creamBg,
+                      maximumSize: const Size(100, 100),
+                      padding: const EdgeInsets.only(right: 15, left: 10),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                      ),
+                    ))
+                : TextButton.icon(
+                    onPressed: () {
+                      AuthService().signOut();
+                    },
+                    icon: const Icon(Icons.login),
+                    label: const Text("Sign Out"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: PsauColors.primaryGreen,
+                      foregroundColor: PsauColors.creamBg,
+                      maximumSize: const Size(100, 100),
+                      padding: const EdgeInsets.only(right: 15),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                      ),
+                    ),
+                  )
+          ],
         ),
         body: _pages[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
           elevation: 0,
           selectedFontSize: 12,
-          backgroundColor: Colors.green[900],
+          backgroundColor: PsauColors.primaryGreen,
           fixedColor: Colors.yellow[800],
           unselectedItemColor: Colors.white,
           showUnselectedLabels: true,
           currentIndex: _selectedPage,
           onTap: (value) {
             setState(() {
-              // if (!(!authenticated && value == 1)) {
               _selectedPage = value;
-              // }
             });
           },
           items: const <BottomNavigationBarItem>[
