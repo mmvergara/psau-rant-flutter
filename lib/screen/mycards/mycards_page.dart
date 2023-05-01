@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:psau_rant_flutter/screen/auth/signin_page.dart';
 import 'package:psau_rant_flutter/screen/flashcards/enter_cardset_id_page.dart';
 import 'package:psau_rant_flutter/screen/mycards/dashboard.dart';
-import 'package:psau_rant_flutter/services/auth_service.dart';
 import 'package:psau_rant_flutter/shared/please_sign_in.dart';
 import 'package:psau_rant_flutter/theme/psau_colors.dart';
 

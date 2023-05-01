@@ -50,7 +50,8 @@ class _FlashCardState extends State<FlashCard>
             alignment: Alignment.center,
             child: _isFrontVisible
                 ? _buildCard(widget.frontText, PsauColors.primaryGreen)
-                : _buildCard(widget.backText, Color.fromARGB(255, 16, 50, 24)),
+                : _buildCard(
+                    widget.backText, const Color.fromARGB(255, 16, 50, 24)),
           );
         },
       ),

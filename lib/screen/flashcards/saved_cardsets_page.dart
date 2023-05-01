@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:psau_rant_flutter/models/card_set_model.dart';
 import 'package:psau_rant_flutter/screen/flashcards/card_set_preview_page.dart';
