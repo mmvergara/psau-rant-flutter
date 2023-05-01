@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:psau_rant_flutter/models/rant_model.dart';
-import 'package:psau_rant_flutter/services/auth_service.dart';
 import 'package:psau_rant_flutter/util/helpers.dart';
 
 class RantService {

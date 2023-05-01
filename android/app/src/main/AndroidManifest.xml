@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.psau_rant_flutter">
    <application
-        android:label="psau_rant_flutter"
+        android:label="PSAU Rant"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
