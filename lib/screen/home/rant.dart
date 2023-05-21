@@ -17,6 +17,7 @@ class RantPiece extends StatefulWidget {
 class RantPieceState extends State<RantPiece> {
   bool isLiked = false;
   int likesLength = 0;
+  bool isVisible = true;
 
   Future<void> handleLikeClick() async {
     if (widget.uid == null) return;
@@ -36,6 +37,15 @@ class RantPieceState extends State<RantPiece> {
     }
   }
 
+  Future<void> handleDeleteRant() async {
+    if (widget.uid == null) return;
+    bool res = await RantService.deleteRant(widget.rant.rantId);
+    if (!res) return;
+    setState(() {
+      isVisible = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -45,7 +55,10 @@ class RantPieceState extends State<RantPiece> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<User?>(context);
+    User? user = Provider.of<User?>(context);
+    bool isOwner = user?.uid == widget.rant.rantAuthorId;
+
+    if (!isVisible) return Container();
 
     return Card(
       elevation: 3,
@@ -57,21 +70,33 @@ class RantPieceState extends State<RantPiece> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(3)),
-                color: PsauColors.primaryGreen,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.rant.rantTitle,
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(3)),
+              color: PsauColors.primaryGreen,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.rant.rantTitle,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                // Delete Rant Button
+                Visibility(
+                  visible: isOwner,
+                  child: GestureDetector(
+                    onTap: handleDeleteRant,
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
                   ),
-                ],
-              )),
+                )
+              ],
+            ),
+          ),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),

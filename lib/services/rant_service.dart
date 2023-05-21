@@ -74,6 +74,15 @@ class RantService {
     }
   }
 
+  static Future<bool> deleteRant(String rantId) async {
+    try {
+      await rantCollection.doc(rantId).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   static Future<bool> createRant(
       String rantTitle, String rantContent, String uid, String username) async {
     try {

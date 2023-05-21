@@ -107,7 +107,6 @@ class _CreateRantPageState extends State<CreateRantPage> {
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
               ),
-              obscureText: true,
             ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
