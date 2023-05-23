@@ -36,24 +36,6 @@ class RantService {
     }
   }
 
-  static Future<bool?> likeRant(String rantId, String userId) async {
-    try {
-      DocumentReference rantRef = rantCollection.doc(rantId);
-      DocumentSnapshot rantSnapshot = await rantRef.get();
-      Map<String, String> rantLikes =
-          rantSnapshot['rant_likes'].cast<String, String>();
-      if (rantLikes.containsKey(userId)) {
-        rantLikes.remove(userId);
-      } else {
-        rantLikes[userId] = userId;
-      }
-      await rantRef.update({'rant_likes': rantLikes});
-      return true;
-    } catch (e) {
-      return null;
-    }
-  }
-
   static Future<bool> handleLikeRant(
       String rantId, bool isLiked, String userId) async {
     try {
