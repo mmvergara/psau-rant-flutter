@@ -23,8 +23,8 @@ class CardSetService {
           (card) {
             return CardPiece(
               cardId: card['card_id'],
-              cardTerm: card['card_term'],
-              cardDefinition: card['card_definition'],
+              cardQuestion: card['card_question'],
+              cardAnswer: card['card_answer'],
             );
           },
         ).toList(),
@@ -51,8 +51,8 @@ class CardSetService {
               (card) {
                 return CardPiece(
                   cardId: card['card_id'],
-                  cardTerm: card['card_term'],
-                  cardDefinition: card['card_definition'],
+                  cardQuestion: card['card_question'],
+                  cardAnswer: card['card_answer'],
                 );
               },
             ).toList(),
@@ -61,6 +61,8 @@ class CardSetService {
       ).toList();
       return cardSets;
     } catch (e) {
+      print("=============================");
+      print(e);
       return null;
     }
   }

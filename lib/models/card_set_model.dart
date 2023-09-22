@@ -1,12 +1,12 @@
 class CardPiece {
   String cardId;
-  String cardTerm;
-  String cardDefinition;
+  String cardQuestion;
+  String cardAnswer;
 
   CardPiece({
     required this.cardId,
-    required this.cardTerm,
-    required this.cardDefinition,
+    required this.cardQuestion,
+    required this.cardAnswer,
   });
 }
 
@@ -28,7 +28,7 @@ class CardSet {
   @override
   String toString() {
     String cardPieces = cardSetCards
-        .map((card) => "${card.cardId}|${card.cardTerm}|${card.cardDefinition}")
+        .map((card) => "${card.cardId}|${card.cardQuestion}|${card.cardAnswer}")
         .join('|');
     return "$cardSetId|$cardSetName|$cardSetAuthorId|$cardSetIsPublic|$cardPieces";
   }
@@ -43,8 +43,8 @@ class CardSet {
     for (int i = 4; i < parts.length; i += 3) {
       cards.add(CardPiece(
         cardId: parts[i],
-        cardTerm: parts[i + 1],
-        cardDefinition: parts[i + 2],
+        cardQuestion: parts[i + 1],
+        cardAnswer: parts[i + 2],
       ));
     }
     return CardSet(

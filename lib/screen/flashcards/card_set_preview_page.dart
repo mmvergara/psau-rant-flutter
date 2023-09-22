@@ -23,13 +23,13 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
   bool copiedToClipboard = false;
   String savingOfflineStatus = "Save Cards for Offline";
 
-  void _playCard(bool termFirst) {
+  void _playCard(bool questionFirst) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PlayFlashCardsPage(
           cardSet: widget.cardSet,
           isShuffled: isShuffled,
-          termFirst: termFirst,
+          questionFirst: questionFirst,
         ),
       ),
     );
@@ -127,6 +127,12 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
               color: PsauColors.primaryGreen,
             ),
           ),
+          const SizedBox(height: 5),
+          const Text(
+            "decides which side of the card to show first",
+            style: TextStyle(fontSize: 12, color: PsauColors.primaryGreen),
+          ),
+          const SizedBox(height: 5),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
@@ -139,7 +145,7 @@ class _CardSetPreviewPageState extends State<CardSetPreviewPage> {
             onPressed: () {
               _playCard(true);
             },
-            child: const Text("Term First"),
+            child: const Text("Question First"),
           ),
           ElevatedButton(
             style: ButtonStyle(

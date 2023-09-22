@@ -6,12 +6,12 @@ import 'package:psau_rant_flutter/theme/psau_colors.dart';
 class PlayFlashCardsPage extends StatefulWidget {
   final CardSet cardSet;
   final bool isShuffled;
-  final bool termFirst;
+  final bool questionFirst;
   const PlayFlashCardsPage({
     super.key,
     required this.cardSet,
     required this.isShuffled,
-    required this.termFirst,
+    required this.questionFirst,
   });
 
   @override
@@ -44,12 +44,12 @@ class _PlayFlashCardsPageState extends State<PlayFlashCardsPage> {
             itemBuilder: (BuildContext context, int index) {
               final flashCard = _cards[index];
               return FlashCard(
-                frontText: widget.termFirst
-                    ? flashCard.cardTerm
-                    : flashCard.cardDefinition,
-                backText: widget.termFirst
-                    ? flashCard.cardDefinition
-                    : flashCard.cardTerm,
+                frontText: widget.questionFirst
+                    ? flashCard.cardQuestion
+                    : flashCard.cardAnswer,
+                backText: widget.questionFirst
+                    ? flashCard.cardAnswer
+                    : flashCard.cardQuestion,
               );
             },
           ),
